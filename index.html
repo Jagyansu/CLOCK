@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="handhour-hand"></div>
+        <div class="handmin-hand"></div>
+        <div class="handsecond-hand"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 350px;
+      height: 350px; 
+      border: 4px solid #018fed58;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      background: url(clock.png);
+      background-size: cover;
+      padding: 2rem;
+      box-shadow: 0 -15px 15px rgba(255,255,255,0.05),
+                  inset 0 -15px 15px rgba(255,255,255,0.05),
+                  0 15px 15px rgba(0,0,0,0.05),
+                  inset 0 15px 15px rgba(0,0,0,0.05);
+
+    
+    }
+
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .handsecond-hand {
+      width: 50%;
+      height: 2px;
+      background: rgb(233, 241, 10);
+      position: absolute;
+      top: 50%;
+      transform-origin: 100% ;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .handmin-hand {
+      width: 50%;
+      height: 5px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100% ;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .handhour-hand {
+      width: 50%;
+      height: 7px;
+      background: rgb(255, 1, 1);
+      position: absolute;
+      top: 50%;
+      transform-origin: 100% ;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    
+  </style>
+
+  <script>
+    const secondHand = document.querySelector('.handsecond-hand');
+    const minsHand = document.querySelector('.handmin-hand');
+    const hourHand = document.querySelector('.handhour-hand'); 
+    function setDate() {
+        const now = new Date();
+
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60)*360)+90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        
+        const mins = now.getMinutes();
+        const minsDegrees = ((mins / 60)*360)+90;
+        minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+        const hour = now.getHours();
+        const hourDegrees = ((hour / 12)*360)+90;
+        hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+    }
+    setInterval(setDate,1000);
+  </script>
+</body>
+</html>
